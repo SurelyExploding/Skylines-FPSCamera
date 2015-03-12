@@ -1,4 +1,4 @@
-﻿using ColossalFramework.UI;
+using ColossalFramework.UI;
 using UnityEngine;
 
 namespace FPSCamera
@@ -20,9 +20,11 @@ namespace FPSCamera
         public static FPSCamera instance;
 
         public float cameraMoveSpeed = 128.0f;
+        static float defaultFOV = Camera.main.fieldOfView;
         private bool fpsModeEnabled = false;
         private CameraController controller;
         float rotationY = 0f;
+        bool setFOV = false;
 
         private static void ShowHideUI(bool show)
         {
@@ -43,6 +45,7 @@ namespace FPSCamera
             {
                 instance.controller.enabled = true;
                 Cursor.visible = true;
+                Camera.main.fieldOfView = defaultFOV;
             }
 
             if (onCameraModeChanged != null)
@@ -83,10 +86,54 @@ namespace FPSCamera
                 {
                     gameObject.transform.position += gameObject.transform.right * cameraMoveSpeed * Time.deltaTime;
                 }
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    cameraMoveSpeed = 1024.0f;
+                }
+                else
+                {
+                    cameraMoveSpeed = 128.0f;
+                }
+                if (Input.GetKey(KeyCode.Mouse1))
+                {
+                    setFOV = true;
+                }
+                else
+                {
+                    setFOV = false;
+                }
+                if (Input.GetKey(KeyCode.R))
+                {
+                    Camera.main.fieldOfView = defaultFOV;
+                }
+                if (setFOV == true)
+                {
+                    Camera.main.fieldOfView -= Input.GetAxis("Mouse Y");
+                    if (Camera.main.fieldOfView <= 5)
+                    {
+                        Camera.main.fieldOfView = 5;
+                    }
+                    else if (Camera.main.fieldOfView >= 170)
+                    {
+                        Camera.main.fieldOfView = 170;
+                    }
+                    
+                }
+                else
+                {
+                    float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X");
+                    rotationY += Input.GetAxis("Mouse Y");
+                    transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+                }
+                if (rotationY >= 90)
+                {
+                    rotationY = 90;
+                }
+                else if(rotationY <= -90)
+                {
+                    rotationY = -90;
+                }
 
-                float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") ;
-                rotationY += Input.GetAxis("Mouse Y");
-                transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
             }
         }
 
