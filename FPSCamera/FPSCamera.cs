@@ -96,18 +96,18 @@ namespace FPSCamera
                     cameraMoveSpeed = 128.0f;
                 }*/
                 if (Input.GetAxis("Mouse ScrollWheel")!=0){
-                    MoveSpeedModifier += Input.GetAxis("Mouse ScrollWheel")*10;
+                    MoveSpeedModifier = (Mathf.Clamp(MoveSpeedModifier + Input.GetAxis("Mouse ScrollWheel"), -100, 30));
                     if (MoveSpeedModifier <= -1)
                     {
-                        cameraMoveSpeed = 128 / System.Math.Abs(MoveSpeedModifier);
+                        cameraMoveSpeed = (128 / (System.Math.Abs(MoveSpeedModifier)));
                     }
                     if (MoveSpeedModifier == 0)
                     {
-                        cameraMoveSpeed = 128 / (MoveSpeedModifier + 1);
+                        cameraMoveSpeed = (128 * (MoveSpeedModifier + 1));
                     }
                     if (MoveSpeedModifier >= 1)
                     {
-                        cameraMoveSpeed = 128 * MoveSpeedModifier;
+                        cameraMoveSpeed = (128 * MoveSpeedModifier);
                     }
                 }
                 if (Input.GetKey(KeyCode.Mouse1))
@@ -124,31 +124,34 @@ namespace FPSCamera
                 }
                 if (setFOV == true)
                 {
-                    Camera.main.fieldOfView -= Input.GetAxis("Mouse Y");
-                    if (Camera.main.fieldOfView <= 5)
+                    Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView - Input.GetAxis("Mouse Y"), 5, 170);
+//                  Camera.main.fieldOfView -= Input.GetAxis("Mouse Y");
+                    /*if (Camera.main.fieldOfView <= 5)
                     {
                         Camera.main.fieldOfView = 5;
                     }
                     else if (Camera.main.fieldOfView >= 170)
                     {
                         Camera.main.fieldOfView = 170;
-                    }
+                    }*/
                     
                 }
                 else
                 {
                     float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X");
-                    rotationY += Input.GetAxis("Mouse Y");
+//                  rotationY += Input.GetAxis("Mouse Y");
+                    rotationY = Mathf.Clamp(rotationY + Input.GetAxis("Mouse Y"), -90, 90);
                     transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+                    
                 }
-                if (rotationY >= 90)
+                /*if (rotationY >= 90)
                 {
                     rotationY = 90;
                 }
                 else if(rotationY <= -90)
                 {
                     rotationY = -90;
-                }
+                }*/
 
             }
         }
