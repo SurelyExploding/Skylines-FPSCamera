@@ -20,6 +20,7 @@ namespace FPSCamera
         public static FPSCamera instance;
 
         public float cameraMoveSpeed = 128.0f;
+        public float MoveSpeedModifier = 0;
         static float defaultFOV = Camera.main.fieldOfView;
         private bool fpsModeEnabled = false;
         private CameraController controller;
@@ -86,13 +87,28 @@ namespace FPSCamera
                 {
                     gameObject.transform.position += gameObject.transform.right * cameraMoveSpeed * Time.deltaTime;
                 }
-                if (Input.GetKey(KeyCode.LeftShift))
+/*              if (Input.GetKey(KeyCode.LeftShift))
                 {
                     cameraMoveSpeed = 1024.0f;
                 }
                 else
                 {
                     cameraMoveSpeed = 128.0f;
+                }*/
+                if (Input.GetAxis("Mouse ScrollWheel")!=0){
+                    MoveSpeedModifier += Input.GetAxis("Mouse ScrollWheel")*10;
+                    if (MoveSpeedModifier <= -1)
+                    {
+                        cameraMoveSpeed = 128 / System.Math.Abs(MoveSpeedModifier);
+                    }
+                    if (MoveSpeedModifier == 0)
+                    {
+                        cameraMoveSpeed = 128 / (MoveSpeedModifier + 1);
+                    }
+                    if (MoveSpeedModifier >= 1)
+                    {
+                        cameraMoveSpeed = 128 * MoveSpeedModifier;
+                    }
                 }
                 if (Input.GetKey(KeyCode.Mouse1))
                 {
