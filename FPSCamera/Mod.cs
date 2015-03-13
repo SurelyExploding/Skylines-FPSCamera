@@ -11,12 +11,12 @@ namespace FPSCamera
 
         public string Name
         {
-            get { return "First Person Camera"; }
+            get { return "SurelyCam!"; }
         }
 
         public string Description
         {
-            get { return "See your city from a different perspective"; }
+            get { return "Based off of nlight's First Person Camera mod"; }
         }
 
     }

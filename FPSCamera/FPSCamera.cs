@@ -1,4 +1,4 @@
-using ColossalFramework.UI;
+﻿using ColossalFramework.UI;
 using UnityEngine;
 
 namespace FPSCamera
@@ -87,6 +87,15 @@ namespace FPSCamera
                 {
                     gameObject.transform.position += gameObject.transform.right * cameraMoveSpeed * Time.deltaTime;
                 }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    gameObject.transform.position += Vector3.up * cameraMoveSpeed * Time.deltaTime;
+                }
+                else if (Input.GetKey(KeyCode.Z))
+                {
+                    gameObject.transform.position -= Vector3.up * cameraMoveSpeed * Time.deltaTime;
+                }
+
 /*              if (Input.GetKey(KeyCode.LeftShift))
                 {
                     cameraMoveSpeed = 1024.0f;
@@ -96,7 +105,7 @@ namespace FPSCamera
                     cameraMoveSpeed = 128.0f;
                 }*/
                 if (Input.GetAxis("Mouse ScrollWheel")!=0){
-                    MoveSpeedModifier = (Mathf.Clamp(MoveSpeedModifier + Input.GetAxis("Mouse ScrollWheel"), -100, 30));
+                    MoveSpeedModifier = (Mathf.Clamp(MoveSpeedModifier + (Input.GetAxis("Mouse ScrollWheel")*25), -500, 100));
                     if (MoveSpeedModifier <= -1)
                     {
                         cameraMoveSpeed = (128 / (System.Math.Abs(MoveSpeedModifier)));
