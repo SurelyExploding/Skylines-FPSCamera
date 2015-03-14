@@ -1,9 +1,9 @@
 ﻿using ColossalFramework.UI;
 using UnityEngine;
 
-namespace FPSCamera
+namespace SurelyCamera
 {
-    public class FPSCamera : MonoBehaviour
+    public class SurelyCamera : MonoBehaviour
     {
 
         public delegate void OnCameraModeChanged(bool state);
@@ -13,11 +13,11 @@ namespace FPSCamera
         public static void Initialize()
         {
             var controller = GameObject.FindObjectOfType<CameraController>();
-            instance = controller.gameObject.AddComponent<FPSCamera>();
+            instance = controller.gameObject.AddComponent<SurelyCamera>();
             instance.controller = controller;
         }
 
-        public static FPSCamera instance;
+        public static SurelyCamera instance;
 
         public float cameraMoveSpeed = 128.0f;
         public float MoveSpeedModifier = 0;

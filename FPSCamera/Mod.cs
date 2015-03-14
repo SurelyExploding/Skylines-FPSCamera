@@ -3,7 +3,7 @@ using ColossalFramework.UI;
 using ICities;
 using UnityEngine;
 
-namespace FPSCamera
+namespace SurelyCamera
 {
 
     public class Mod : IUserMod
@@ -73,8 +73,8 @@ namespace FPSCamera
             cameraModeLabel.transformPosition = new Vector3(1.15f, 0.90f);
             cameraModeLabel.Hide();
 
-            FPSCamera.Initialize();
-            FPSCamera.onCameraModeChanged = state =>
+            SurelyCamera.Initialize();
+            SurelyCamera.onCameraModeChanged = state =>
             {
                 cameraModeButton.text = state ? "Camera: First Person" : "Camera: Standard";
                 if (state)
@@ -90,7 +90,7 @@ namespace FPSCamera
 
         private void ButtonClick(UIComponent component, UIMouseEventParameter eventParam)
         {
-            FPSCamera.SetMode(!FPSCamera.IsEnabled());
+            SurelyCamera.SetMode(!SurelyCamera.IsEnabled());
         }
 
     }

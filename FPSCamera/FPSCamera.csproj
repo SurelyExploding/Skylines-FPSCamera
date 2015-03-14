@@ -7,8 +7,8 @@
     <ProjectGuid>{72C99E7C-C11B-4669-90ED-0944DE5B9085}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FPSCamera</RootNamespace>
-    <AssemblyName>FPSCamera</AssemblyName>
+    <RootNamespace>SurelyCamera</RootNamespace>
+    <AssemblyName>SurelyCam</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -56,7 +56,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy FPSCamera.dll "C:\Users\Jason\AppData\Local\Colossal Order\Cities_Skylines\Addons\Mods\FPSCam"</PostBuildEvent>
+    <PostBuildEvent>copy SurelyCam.dll "C:\Users\Jason\AppData\Local\Colossal Order\Cities_Skylines\Addons\Mods\SurelyCam\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
